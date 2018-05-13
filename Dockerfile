@@ -27,6 +27,11 @@ RUN apt-get install jq -y
 RUN curl -o /bin/slack https://raw.githubusercontent.com/rockymadden/slack-cli/master/src/slack
 RUN chmod +x /bin/slack
 # install kubectl
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+RUN cat <<EOF >/etc/apt/sources.list.d/kubernetes.list \
+  deb http://apt.kubernetes.io/ kubernetes-xenial main \
+  EOF
+RUN apt-get update
 RUN apt-get install -y kubectl
 
 # # copy id_rsa, make it work
