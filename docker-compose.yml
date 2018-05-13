@@ -1,0 +1,57 @@
+version: '2'
+
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    container_name:  nginx-proxy
+    ports:
+     - "80:80"
+     - "443:443"
+    networks:
+     - elk
+    volumes:
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./htpasswd:/etc/nginx/htpasswd
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /etc/nginx/conf.d
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    networks:
+     - elk
+    volumes_from:
+     - nginx-proxy
+    volumes:
+     - ./nginx/certs:/etc/nginx/certs:rw
+     - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+     - nginx-proxy
+
+  jenkins:
+    build:
+      context: jenkins/
+    container_name: jenkins
+    networks:
+     - elk
+    volumes:
+     - ./jenkins/jenkins_home:/var/jenkins_home
+     - ./ssh-key:/root/.ssh
+     - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+     - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+     - LETSENCRYPT_HOST=${JENKINS_LETSENCRYPT_HOST}
+     - VIRTUAL_HOST=${JENKINS_VIRTUAL_HOST}
+     - VIRTUAL_PORT=8080
+    ports:
+     - "8080:8080"
+    expose:
+     - "8080"
+
+networks:
+  elk:
+    driver: bridge

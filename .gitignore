@@ -1,0 +1,6 @@
+.env
+jenkins_home/
+nginx/certs
+elasticdata/
+jenkins/id_rsa
+jenkins/id_rsa.pub
