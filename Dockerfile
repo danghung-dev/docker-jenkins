@@ -17,6 +17,15 @@ stable"
 
 RUN apt-get update
 RUN apt-get install -y docker-ce
+
+# install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
+
+# install terraform
+RUN curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
+RUN unzip /tmp/terraform.zip -d /usr/local/bin; /bin/rm /tmp/terraform.zip
+
 # install awscli
 RUN apt install awscli -y
 RUN apt-get install python3-pip -y
