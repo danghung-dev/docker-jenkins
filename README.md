@@ -193,3 +193,6 @@ fi
 docker rmi ${REGISTRY_URL}:v_${BUILD_NUMBER}
 ```
 
+# Jenkins master & slave for bulid
+![jenkins build](https://d1.awsstatic.com/Projects/P5505030/arch-diagram_jenkins.7677f587a3727562ec4e6c7e69ed594729cab171.png)
+https://aws.amazon.com/getting-started/projects/setup-jenkins-build-server/
