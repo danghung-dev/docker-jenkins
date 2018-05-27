@@ -206,3 +206,6 @@ https://wiki.jenkins.io/display/JENKINS/Amazon+EC2+Container+Service+Plugin
 
 ![jenkins build](https://d1.awsstatic.com/Projects/P5505030/arch-diagram_jenkins.7677f587a3727562ec4e6c7e69ed594729cab171.png)
 https://aws.amazon.com/getting-started/projects/setup-jenkins-build-server/
+
+## Jenkins slave dockerfile (ssh key)
+https://engineering.riotgames.com/news/jenkins-ephemeral-docker-tutorial
