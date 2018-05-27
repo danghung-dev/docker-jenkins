@@ -194,5 +194,15 @@ docker rmi ${REGISTRY_URL}:v_${BUILD_NUMBER}
 ```
 
 # Jenkins master & slave for bulid
+
+## Jenkins slave ECS
+https://wiki.jenkins.io/display/JENKINS/Amazon+EC2+Container+Service+Plugin
+// TODO: 
+1. Setup IAM account & role
+2. Install Amazon EC2 Container Service Plugin
+3. Build jenkins slave image that can run node, aws-cli, slack, ...
+
+## Jenkins slave EC2
+
 ![jenkins build](https://d1.awsstatic.com/Projects/P5505030/arch-diagram_jenkins.7677f587a3727562ec4e6c7e69ed594729cab171.png)
 https://aws.amazon.com/getting-started/projects/setup-jenkins-build-server/
